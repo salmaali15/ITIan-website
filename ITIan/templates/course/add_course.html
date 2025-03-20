@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Add course{% endblock %}
+{% block header %}Add course{% endblock %}
+{% block content %}
+<form method="post" class="container mt-4">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="name" class="form-label">Course Name:</label>
+        <input type="text" id="name" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea id="description" name="description" class="form-control" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="duration" class="form-label">Duration:</label>
+        <input type="text" id="duration" name="duration" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

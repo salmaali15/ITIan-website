@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Update Course{% endblock %}
+{% block header %}Update Course{% endblock %}
+{% block content %}
+<form method="post" class="container mt-4">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Course Title:</label>
+        <input type="text" id="title" name="name" class="form-control" value="{{ course.title }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea id="description" name="description" class="form-control" rows="4" required>{{ course.description }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="duration" class="form-label">Duration (in hours):</label>
+        <input type="number" id="duration" name="duration" class="form-control" value="{{ course.duration }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{% endblock %}

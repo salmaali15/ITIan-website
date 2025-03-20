@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} trainee list{% endblock %}
+{% block header %} trainee list{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <a href="{% url "addt" %}" class="btn btn-primary mb-3">ADD trainee</a>
+    {% if trainees %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>age</th>
+                    <th colspan="2">action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trainee in trainees %}
+                <tr>
+                    <td>{{ trainee.id }}</td>
+                    <td>{{ trainee.name }}</td>
+                    <td>{{ trainee.email }}</td>
+                    <td>{{ trainee.age }}</td>
+                    <td><a href="{% url "deletet" trainee.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                    <td><a href="{% url "updatet" trainee.id %}" class="btn btn-warning btn-sm">Update</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-muted">No trainees found.</p>
+    {% endif %}
+</div>
+{% endblock content %}
