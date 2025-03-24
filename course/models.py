@@ -10,4 +10,12 @@ class Course(models.Model):
     def __str__(self):
         return self.name
     
+    @classmethod
+    def get_course_by_id(cls,id):
+        return cls.objects.get(id=id)
+    
+    @classmethod
+    def get_all_courses(cls):
+        return cls.objects.all()
+
     
