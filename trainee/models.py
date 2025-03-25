@@ -12,4 +12,11 @@ class Trainee(models.Model):
     def __str__(self):
         return self.name
     
+    @classmethod
+    def get_trainee_by_id(cls,id):
+        return cls.objects.get(id=id)
+    
+    @classmethod
+    def get_all_trainee(cls):
+        return cls.objects.all()
     
