@@ -4,6 +4,11 @@ from .forms import TraineeForm
 from django .views import View
 from django.views.generic import ListView,DeleteView
 from django.urls import reverse_lazy
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status, generics
+from .serializers import TraineeSerializer
+
 class AddTrainee(View):
     def get(self,req):
         form=TraineeForm()
@@ -79,3 +84,20 @@ def traineeList(req):
 def deleteTrainee(req,id):
     Trainee.objects.get(id=id).delete()
     return redirect("t_list")
+
+class TraineeListCreateAPI(APIView):
+    def get(self, request):
+        trainees = Trainee.objects.all()
+        serializer = TraineeSerializer(trainees, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = TraineeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class TraineeUpdateDeleteAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Trainee.objects.all()
+    serializer_class = TraineeSerializer

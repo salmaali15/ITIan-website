@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
+from rest_framework.viewsets import ModelViewSet
+from .serializers import CourseSerializer
 
 def addCourse(req):
     if req.method == 'POST':
@@ -31,3 +33,7 @@ def courseList(req):
 def deleteCourse(req, id):
     Course.objects.get(id=id).delete()
     return redirect("c_list")
+
+class CourseViewSet(ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
